@@ -7,6 +7,16 @@
     android:padding="16dp"
     android:background="#FFFFFF">
 
+    <ImageView
+        android:id="@+id/imagePantryLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="12dp"
+        android:contentDescription="Smart Pantry Manager logo"
+        android:scaleType="fitCenter"
+        android:src="@drawable/applogo" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,6 +54,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewIngredients"
+        android:contentDescription="Your Pantry Ingredients"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
