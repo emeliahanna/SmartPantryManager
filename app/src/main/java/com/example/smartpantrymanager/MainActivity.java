@@ -1,7 +1,7 @@
 package com.example.smartpantrymanager;
 
 import android.os.Bundle;
-
+import android.content.Intent;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
         });
         findViewById(R.id.buttonSuggestedRecipes).setOnClickListener(v -> {
             android.content.Intent intent = new android.content.Intent(MainActivity.this, SuggestedRecipesActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.buttonSettings).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         });
     }
