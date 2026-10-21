@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginBottom="8dp"
+    android:background="#F1F5F1">
+
+    <TextView
+        android:id="@+id/textRecipeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recipe Name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#243B2A" />
+
+    <TextView
+        android:id="@+id/textRecipeDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recipe description"
+        android:textSize="15sp"
+        android:paddingTop="4dp" />
+
+    <TextView
+        android:id="@+id/textRecipeTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cooking time: 15 minutes"
+        android:textSize="14sp"
+        android:paddingTop="6dp" />
+
+</LinearLayout>

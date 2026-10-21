@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
             android.content.Intent intent = new android.content.Intent(MainActivity.this, AddIngredientActivity.class);
             startActivity(intent);
         });
+        findViewById(R.id.buttonSuggestedRecipes).setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(MainActivity.this, SuggestedRecipesActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
