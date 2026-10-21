@@ -5,7 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import android.app.AlertDialog;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,9 +16,18 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
 
     private final ArrayList<Ingredient> ingredients;
 
-    public IngredientAdapter(ArrayList<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+
+    public interface OnIngredientClickListener {
+        void onIngredientClick(Ingredient ingredient);
     }
+
+    private final OnIngredientClickListener listener;
+
+    public IngredientAdapter(ArrayList<Ingredient> ingredients, OnIngredientClickListener listener) {
+        this.ingredients = ingredients;
+        this.listener = listener;
+    }
+
 
     @NonNull
     @Override
@@ -31,9 +41,27 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
         Ingredient ingredient = ingredients.get(position);
 
+        holder.itemView.setOnClickListener(v -> listener.onIngredientClick(ingredient));
+        holder.itemView.setOnLongClickListener(v -> {
+            new AlertDialog.Builder(v.getContext()).setTitle("Delete Ingredient").setMessage("Delete " + ingredient.getName() + "?").setPositiveButton("Delete", (dialog, which) -> {
+                PantryDatabaseHelper databaseHelper = new PantryDatabaseHelper(v.getContext());
+                int rowsDeleted = databaseHelper.deleteIngredient(ingredient.getId());
+                databaseHelper.close();
+
+                if (rowsDeleted > 0) {
+                    ingredients.remove(ingredient);
+                    notifyDataSetChanged();
+
+                    Toast.makeText(v.getContext(),"Ingredient deleted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(v.getContext(), "Could not delete ingredient", Toast.LENGTH_SHORT).show();
+                }
+            }).setNegativeButton("Cancel", null).show();
+            return true;
+        });
+
         holder.textIngredientName.setText(ingredient.getName());
-        holder.textIngredientQuantity.setText(
-                "Quantity: " + ingredient.getQuantity() + " " + ingredient.getUnit());
+        holder.textIngredientQuantity.setText("Quantity: " + ingredient.getQuantity() + " " + ingredient.getUnit());
 
         String expiry = ingredient.getExpiryDate();
 
@@ -58,9 +86,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
             super(itemView);
 
             textIngredientName = itemView.findViewById(R.id.textIngredientName);
-
             textIngredientQuantity = itemView.findViewById(R.id.textIngredientQuantity);
-
             textIngredientExpiry = itemView.findViewById(R.id.textIngredientExpiry);
         }
     }

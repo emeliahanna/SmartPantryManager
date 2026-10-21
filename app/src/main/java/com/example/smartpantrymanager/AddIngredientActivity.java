@@ -19,6 +19,8 @@ public class AddIngredientActivity extends AppCompatActivity {
     private EditText editUnit;
     private EditText editExpiryDate;
     private PantryDatabaseHelper databaseHelper;
+    private int ingredientId = -1;
+    private boolean isEditMode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,13 @@ public class AddIngredientActivity extends AppCompatActivity {
         Button buttonCancel = findViewById(R.id.buttonCancel);
 
         databaseHelper = new PantryDatabaseHelper(this);
+
+        ingredientId = getIntent().getIntExtra("ingredient_id", -1);
+        isEditMode = ingredientId != -1;
+
+        if (isEditMode) {
+            loadIngredientForEditing();
+        }
 
         editExpiryDate.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
@@ -96,17 +105,40 @@ public class AddIngredientActivity extends AppCompatActivity {
             editQuantity.requestFocus();
             return;
         }
-
         Ingredient ingredient = new Ingredient(name, quantity, unit, TextUtils.isEmpty(expiryDate) ? null : expiryDate);
+        boolean success;
 
-        long result = databaseHelper.addIngredient(ingredient);
+        if (isEditMode) {
+            ingredient.setId(ingredientId);
+            success = databaseHelper.updateIngredient(ingredient) > 0;
+        } else {
+            success = databaseHelper.addIngredient(ingredient) != -1;
+        }
 
-        if (result != -1) {
-            Toast.makeText(this, "Ingredient saved successfully", Toast.LENGTH_SHORT).show();
+        if (success) {
+            Toast.makeText(this, isEditMode ? "Ingredient updated successfully" : "Ingredient saved successfully",
+                    Toast.LENGTH_SHORT).show();
             setResult(RESULT_OK);
             finish();
         } else {
             Toast.makeText(this, "Could not save ingredient", Toast.LENGTH_SHORT).show();
         }
+    }
+    private void loadIngredientForEditing() {
+        for (Ingredient ingredient : databaseHelper.getAllIngredients()) {
+            if (ingredient.getId() == ingredientId) {
+                editIngredientName.setText(ingredient.getName());
+                editQuantity.setText(String.valueOf(ingredient.getQuantity()));
+                editUnit.setText(ingredient.getUnit());
+
+                if (ingredient.getExpiryDate() != null) {
+                    editExpiryDate.setText(ingredient.getExpiryDate());
+                }
+                findViewById(R.id.buttonSaveIngredient).setOnClickListener(v -> saveIngredient());
+                return;
+            }
+        }
+        Toast.makeText(this, "Ingredient not found", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

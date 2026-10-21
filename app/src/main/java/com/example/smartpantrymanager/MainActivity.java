@@ -46,7 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadIngredients() {
         ingredients = databaseHelper.getAllIngredients();
-        ingredientAdapter = new IngredientAdapter(ingredients);
+        ingredientAdapter = new IngredientAdapter(ingredients, ingredient -> {
+            android.content.Intent intent = new android.content.Intent(MainActivity.this, AddIngredientActivity.class);
+            intent.putExtra("ingredient_id", ingredient.getId());
+            startActivity(intent);
+        });
         recyclerViewIngredients.setAdapter(ingredientAdapter);
     }
 }
