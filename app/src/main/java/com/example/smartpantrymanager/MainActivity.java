@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewIngredients.setLayoutManager(new LinearLayoutManager(this));
 
         loadIngredients();
+
+        findViewById(R.id.buttonAddIngredient).setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(MainActivity.this, AddIngredientActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
