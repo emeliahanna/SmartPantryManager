@@ -53,8 +53,8 @@ public class RecipeSeeder {
                     "Boil pasta. Cook chopped tomatoes with onion, then combine.",
                     25,
                     new String[]{"pasta", "tomatoes", "onion"},
-                    new double[]{200, 200, 1},
-                    new String[]{"g", "g", "pieces"});
+                    new double[]{200, 2, 1},
+                    new String[]{"g", "pieces", "pieces"});
 
             addRecipe(db, "Cheese Omelette",
                     "Omelette filled with cheese",

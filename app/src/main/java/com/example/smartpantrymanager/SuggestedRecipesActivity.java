@@ -42,12 +42,14 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
         loadRecipes();
     }
 
+
     private void loadRecipes() {
         ArrayList<Recipe> recipes = databaseHelper.getSuggestedRecipes();
         recipeAdapter = new RecipeAdapter(recipes, recipe -> {
-
+            android.content.Intent intent = new android.content.Intent( SuggestedRecipesActivity.this, RecipeDetailActivity.class);
+            intent.putExtra("recipe_id", recipe.getId());
+            startActivity(intent);
         });
-
         recyclerViewRecipes.setAdapter(recipeAdapter);
     }
 }
