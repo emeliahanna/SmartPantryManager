@@ -5,8 +5,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:layout_marginBottom="8dp"
-    android:background="#F1F8E9">
+    android:layout_marginBottom="12dp"
+    android:background="#FFFFFF"
+    android:elevation="3dp">
 
     <TextView
         android:id="@+id/textIngredientName"
@@ -15,24 +16,25 @@
         android:text="Ingredient name"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#263238" />
+        android:textColor="#234B35"
+        android:paddingBottom="6dp" />
 
     <TextView
         android:id="@+id/textIngredientQuantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="2dp"
         android:text="Quantity: 2 kg"
         android:textSize="15sp"
-        android:textColor="#455A64" />
+        android:textColor="#536957" />
 
     <TextView
         android:id="@+id/textIngredientExpiry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="6dp"
         android:text="Expiry: 2026-12-31"
         android:textSize="14sp"
-        android:textColor="#455A64" />
+        android:textColor="#718071" />
 
 </LinearLayout>
