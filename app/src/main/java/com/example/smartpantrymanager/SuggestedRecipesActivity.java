@@ -45,8 +45,18 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
 
     private void loadRecipes() {
         ArrayList<Recipe> recipes = databaseHelper.getSuggestedRecipes();
+        textNoRecipes = findViewById(R.id.textNoRecipes);
+
+        if (recipes.isEmpty()) {
+            textNoRecipes.setVisibility(View.VISIBLE);
+            recyclerViewRecipes.setVisibility(View.GONE);
+        } else {
+            textNoRecipes.setVisibility(View.GONE);
+            recyclerViewRecipes.setVisibility(View.VISIBLE);
+        }
+
         recipeAdapter = new RecipeAdapter(recipes, recipe -> {
-            android.content.Intent intent = new android.content.Intent( SuggestedRecipesActivity.this, RecipeDetailActivity.class);
+            android.content.Intent intent = new android.content.Intent(SuggestedRecipesActivity.this, RecipeDetailActivity.class);
             intent.putExtra("recipe_id", recipe.getId());
             startActivity(intent);
         });
