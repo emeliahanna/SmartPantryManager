@@ -7,18 +7,41 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private RecyclerView recyclerViewIngredients;
+    private PantryDatabaseHelper databaseHelper;
+    private IngredientAdapter ingredientAdapter;
+    private ArrayList<Ingredient> ingredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        recyclerViewIngredients = findViewById(R.id.recyclerViewIngredients);
+        databaseHelper = new PantryDatabaseHelper(this);
+        recyclerViewIngredients.setLayoutManager(new LinearLayoutManager(this));
+
+        loadIngredients();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (databaseHelper != null) {
+            loadIngredients();
+        }
+    }
+
+    private void loadIngredients() {
+        ingredients = databaseHelper.getAllIngredients();
+        ingredientAdapter = new IngredientAdapter(ingredients);
+        recyclerViewIngredients.setAdapter(ingredientAdapter);
     }
 }
