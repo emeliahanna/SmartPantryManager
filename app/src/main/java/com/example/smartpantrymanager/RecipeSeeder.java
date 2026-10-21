@@ -88,7 +88,7 @@ public class RecipeSeeder {
                     new double[]{200, 1, 1},
                     new String[]{"g", "pieces", "pieces"});
 
-            addRecipe(db, "Potato Mash",
+            addRecipe(db, "Mashed Potato",
                     "Creamy mashed potatoes",
                     "Boil potatoes until soft, then mash with butter and milk.",
                     25,
@@ -160,7 +160,7 @@ public class RecipeSeeder {
                     new double[]{2},
                     new String[]{"pieces"});
 
-            addRecipe(db, "Egg Fried Rice",
+            addRecipe(db, "Fried Rice",
                     "Rice stir-fried with egg",
                     "Cook rice. Scramble eggs, add rice, and stir-fry thoroughly.",
                     20,

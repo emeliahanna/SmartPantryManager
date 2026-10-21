@@ -30,6 +30,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRecipes"
+        android:contentDescription="Suggested Recipes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

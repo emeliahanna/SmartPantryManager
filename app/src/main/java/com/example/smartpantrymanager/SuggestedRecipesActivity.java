@@ -1,14 +1,23 @@
 package com.example.smartpantrymanager;
 
 import android.os.Bundle;
-
+import android.view.View;
+import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class SuggestedRecipesActivity extends AppCompatActivity {
+    private RecyclerView recyclerViewRecipes;
+    private TextView textNoRecipes;
+    private PantryDatabaseHelper databaseHelper;
+    private RecipeAdapter recipeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +29,25 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        recyclerViewRecipes = findViewById(R.id.recyclerViewRecipes);
+        databaseHelper = new PantryDatabaseHelper(this);
+        recyclerViewRecipes.setLayoutManager(new LinearLayoutManager(this));
         findViewById(R.id.buttonBackToPantry).setOnClickListener(v -> {
             finish();
         });
+        //seed the database if recipes have not been added yet.
+        RecipeSeeder recipeSeeder = new RecipeSeeder(databaseHelper);
+        recipeSeeder.seedRecipes();
+
+        loadRecipes();
+    }
+
+    private void loadRecipes() {
+        ArrayList<Recipe> recipes = databaseHelper.getSuggestedRecipes();
+        recipeAdapter = new RecipeAdapter(recipes, recipe -> {
+
+        });
+
+        recyclerViewRecipes.setAdapter(recipeAdapter);
     }
 }

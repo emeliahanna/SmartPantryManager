@@ -252,4 +252,166 @@ public class PantryDatabaseHelper extends SQLiteOpenHelper {
         }
         return ingredients;
     }
+
+    //return only recipes that can be made with the current pantry.
+    public ArrayList<Recipe> getSuggestedRecipes() {
+        ArrayList<Ingredient> pantry = getAllIngredients();
+        ArrayList<Recipe> allRecipes = getAllRecipes();
+        ArrayList<Recipe> suggestions = new ArrayList<>();
+
+        for (Recipe recipe : allRecipes) {
+            if (canMakeRecipe(recipe, pantry)) {
+                suggestions.add(recipe);
+            }
+        }
+        return suggestions;
+    }
+
+    //check every ingredient required by one recipe.
+    private boolean canMakeRecipe(Recipe recipe, ArrayList<Ingredient> pantry) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "recipe_ingredients",
+                new String[]{"ingredient_name", "required_quantity", "unit"},
+                "recipe_id = ?",
+                new String[]{String.valueOf(recipe.getId())},
+                null, null, null
+        );
+        boolean hasIngredients = false;
+
+        try {
+            while (cursor.moveToNext()) {
+                hasIngredients = true;
+
+                String requiredName = normalizeIngredientName(cursor.getString(0));
+
+                double requiredQuantity = cursor.getDouble(1);
+                String requiredUnit = cursor.getString(2);
+
+                String requiredUnitType = getUnitType(requiredUnit);
+
+                double requiredBaseQuantity = toBaseQuantity(requiredQuantity, requiredUnit);
+
+                double availableBaseQuantity = 0;
+
+                for (Ingredient ingredient : pantry) {
+                    String pantryName = normalizeIngredientName(
+                            ingredient.getName());
+
+                    String pantryUnitType = getUnitType(
+                            ingredient.getUnit());
+
+                    if (requiredName.equals(pantryName) && requiredUnitType.equals(pantryUnitType)) {
+                        availableBaseQuantity += toBaseQuantity(ingredient.getQuantity(), ingredient.getUnit());
+                    }
+                }
+
+                //missing or insufficient ingredients disqualify the recipe.
+                if (availableBaseQuantity + 0.000001
+                        < requiredBaseQuantity) {
+                    return false;
+                }
+            }
+        } finally {
+            cursor.close();
+            db.close();
+        }
+
+        //a recipe without any required ingredients is not suggested.
+        return hasIngredients;
+    }
+
+    //normalize common singular and plural ingredient names.
+    private String normalizeIngredientName(String name) {
+        String normalized = name.trim().toLowerCase(java.util.Locale.ROOT).replaceAll("[^a-z0-9 ]", "").replaceAll("\\s+", " ");
+
+        switch (normalized) {
+            case "tomatoes":
+                return "tomato";
+            case "potatoes":
+                return "potato";
+            case "leaves":
+                return "leaf";
+            case "loaves":
+                return "loaf";
+        }
+
+        if (normalized.endsWith("ies")
+                && normalized.length() > 3) {
+            return normalized.substring(0,
+                    normalized.length() - 3) + "y";
+        }
+
+        if (normalized.endsWith("s")
+                && !normalized.endsWith("ss")
+                && normalized.length() > 1) {
+            return normalized.substring(0, normalized.length() - 1);
+        }
+        return normalized;
+    }
+
+    //convert compatible units to a common unit type.
+    private String getUnitType(String unit) {
+        String normalized = unit.trim().toLowerCase(java.util.Locale.ROOT);
+
+        switch (normalized) {
+            case "g":
+            case "gram":
+            case "grams":
+            case "kg":
+            case "kilogram":
+            case "kilograms":
+                return "mass";
+
+            case "ml":
+            case "millilitre":
+            case "millilitres":
+            case "milliliter":
+            case "milliliters":
+            case "l":
+            case "litre":
+            case "litres":
+            case "liter":
+            case "liters":
+                return "volume";
+
+            case "piece":
+            case "pieces":
+            case "pc":
+            case "pcs":
+            case "item":
+            case "items":
+                return "count";
+
+            case "slice":
+            case "slices":
+                return "slice";
+
+            default:
+                return normalized;
+        }
+    }
+
+    //convert kg to g and litres to ml.
+    private double toBaseQuantity(double quantity, String unit) {
+        String normalized = unit.trim().toLowerCase(java.util.Locale.ROOT);
+
+        switch (normalized) {
+            case "kg":
+            case "kilogram":
+            case "kilograms":
+                return quantity * 1000.0;
+
+            case "l":
+            case "litre":
+            case "litres":
+            case "liter":
+            case "liters":
+                return quantity * 1000.0;
+
+            default:
+                return quantity;
+        }
+    }
 }
