@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:layout_marginBottom="8dp"
-    android:background="#F1F5F1">
+    android:padding="18dp"
+    android:layout_marginBottom="12dp"
+    android:background="#F7F6EF"
+    android:elevation="3dp">
 
     <TextView
         android:id="@+id/textRecipeName"
@@ -14,7 +16,8 @@
         android:text="Recipe Name"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#243B2A" />
+        android:textColor="#234B35"
+        android:paddingBottom="6dp" />
 
     <TextView
         android:id="@+id/textRecipeDescription"
@@ -22,14 +25,18 @@
         android:layout_height="wrap_content"
         android:text="Recipe description"
         android:textSize="15sp"
-        android:paddingTop="4dp" />
+        android:textColor="#536957"
+        android:paddingTop="2dp" />
 
     <TextView
         android:id="@+id/textRecipeTime"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cooking time: 15 minutes"
-        android:textSize="14sp"
-        android:paddingTop="6dp" />
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#234B35"
+        android:backgroundTint="#FFFFFF"
+        android:paddingTop="10dp" />
 
 </LinearLayout>
