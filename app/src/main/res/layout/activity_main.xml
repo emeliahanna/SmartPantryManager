@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--allow entire screen to scroll when content exceeds available space-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F7F6EF"
     android:fillViewport="true">
 
+    <!--arrange entire screen element vertically, from top to bottom-->
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -12,7 +14,7 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!--app branding-->
+        <!--app logo-->
         <ImageView
             android:id="@+id/imagePantryLogo"
             android:layout_width="88dp"
@@ -24,6 +26,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/applogo" />
 
+        <!--display app name-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,6 +47,7 @@
             android:letterSpacing="0.12"
             android:layout_marginBottom="6dp" />
 
+        <!--heading for user's pantry-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,6 +83,7 @@
                 android:textSize="14sp"
                 android:layout_marginBottom="12dp" />
 
+            <!--open activity where users can add ingredients to pantry-->
             <Button
                 android:id="@+id/buttonAddIngredient"
                 android:layout_width="match_parent"
@@ -90,6 +95,7 @@
                 android:backgroundTint="#2F6846"
                 android:minHeight="52dp" />
 
+            <!--open activity where users can see availalbe recipes they can make with their ingredients-->
             <Button
                 android:id="@+id/buttonSuggestedRecipes"
                 android:layout_width="match_parent"
@@ -114,6 +120,7 @@
             android:textStyle="bold"
             android:layout_marginBottom="10dp" />
 
+        <!--recycler view that displays pantry ingredients as a scrollable list-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewIngredients"
             android:layout_width="match_parent"
@@ -122,6 +129,7 @@
             android:paddingTop="4dp"
             android:clipToPadding="false" />
 
+        <!--button to open setting screen-->
         <Button
             android:id="@+id/buttonSettings"
             android:layout_width="match_parent"

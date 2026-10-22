@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--layout for displaying ingredient card-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -9,6 +10,7 @@
     android:background="#FFFFFF"
     android:elevation="3dp">
 
+    <!--display ingredient name-->
     <TextView
         android:id="@+id/textIngredientName"
         android:layout_width="match_parent"
@@ -19,6 +21,7 @@
         android:textColor="#234B35"
         android:paddingBottom="6dp" />
 
+    <!--display ingredient quantity and unit-->
     <TextView
         android:id="@+id/textIngredientQuantity"
         android:layout_width="match_parent"
@@ -28,6 +31,7 @@
         android:textSize="15sp"
         android:textColor="#536957" />
 
+    <!--display ingredient expiry date-->
     <TextView
         android:id="@+id/textIngredientExpiry"
         android:layout_width="match_parent"

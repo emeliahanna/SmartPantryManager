@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--layout for suggested recipes screen-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -7,6 +8,7 @@
     android:padding="20dp"
     android:background="#F7F6EF">
 
+    <!--display app name-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,6 +18,7 @@
         android:textStyle="bold"
         android:layout_marginTop="8dp" />
 
+    <!--display screen heading-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,6 +28,7 @@
         android:textStyle="bold"
         android:layout_marginTop="6dp" />
 
+    <!--display intro message-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,6 +38,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginBottom="16dp" />
 
+    <!--explain how recipe suggestion use pantry ignredients-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,35 +47,39 @@
         android:background="#E7EDE1"
         android:layout_marginBottom="12dp">
 
+        <!--display recipe section heading-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ready to cook"
+            android:text="Let's get ready to cCok"
             android:textColor="#234B35"
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <!--describe recipes-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="These recipes use ingredients currently available in your pantry."
+            android:text="These Recipes use Ingredients that are  currently available in your pantry."
             android:textColor="#536957"
             android:textSize="14sp"
             android:layout_marginTop="5dp" />
 
     </LinearLayout>
 
+    <!--show message when no recipes available-->
     <TextView
         android:id="@+id/textNoRecipes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No recipes available yet. Add more ingredients to your pantry to discover what you can make!"
+        android:text="No recipes available yet. Add more ingredients to your pantry and discover what you can make!"
         android:textColor="#536957"
         android:textSize="15sp"
         android:gravity="center"
         android:padding="24dp"
         android:visibility="gone" />
 
+    <!--display recipes cards in scrollable list-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRecipes"
         android:layout_width="match_parent"
@@ -80,6 +89,7 @@
         android:clipToPadding="false"
         android:paddingBottom="8dp" />
 
+    <!--return to pantry main screen-->
     <Button
         android:id="@+id/buttonBackToPantry"
         android:layout_width="match_parent"

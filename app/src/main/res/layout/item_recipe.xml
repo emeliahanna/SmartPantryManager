@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--layout for an individual recipe card-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -9,6 +10,7 @@
     android:background="#F7F6EF"
     android:elevation="3dp">
 
+    <!--display recipe name-->
     <TextView
         android:id="@+id/textRecipeName"
         android:layout_width="match_parent"
@@ -19,6 +21,7 @@
         android:textColor="#234B35"
         android:paddingBottom="6dp" />
 
+    <!--display short recipe description-->
     <TextView
         android:id="@+id/textRecipeDescription"
         android:layout_width="match_parent"
@@ -28,11 +31,12 @@
         android:textColor="#536957"
         android:paddingTop="2dp" />
 
+    <!--display estimated cooking time-->
     <TextView
         android:id="@+id/textRecipeTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cooking time: 15 minutes"
+        android:text="Cooking Time: 15 minutes"
         android:textStyle="bold"
         android:textSize="16sp"
         android:textColor="#234B35"
