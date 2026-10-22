@@ -14,61 +14,140 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Ingredient"
-            android:textColor="#33691E"
-            android:textSize="26sp"
+            android:text="SMART PANTRY"
+            android:textColor="#718071"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:paddingBottom="20dp" />
+            android:letterSpacing="0.12"
+            android:layout_marginTop="8dp" />
 
-        <EditText
-            android:id="@+id/editIngredientName"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingredient name"
-            android:inputType="textCapWords"
-            android:singleLine="true" />
+            android:text="Add Ingredient"
+            android:textColor="#234B35"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginTop="6dp" />
 
-        <EditText
-            android:id="@+id/editQuantity"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Quantity"
-            android:inputType="numberDecimal"
-            android:singleLine="true" />
+            android:text="Keep your pantry up to date."
+            android:textColor="#718071"
+            android:textSize="14sp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="20dp" />
 
-        <EditText
-            android:id="@+id/editUnit"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Unit (e.g. kg, g, ml, pieces)"
-            android:inputType="text"
-            android:singleLine="true" />
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:background="#E7EDE1">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingredient Details"
+                android:textColor="#234B35"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="14dp" />
 
-        <EditText
-            android:id="@+id/editExpiryDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Expiry date (optional)"
-            android:focusable="false"
-            android:clickable="true"
-            android:cursorVisible="false"
-            android:inputType="none"
-            android:singleLine="true" />
+            <EditText
+                android:id="@+id/editIngredientName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingredient Name"
+                android:inputType="textCapWords"
+                android:singleLine="true"
+                android:minHeight="52dp"
+                android:padding="12dp"
+                android:backgroundTint="#718071"
+                android:textColor="#234B35"
+                android:textColorHint="#687568"/>
 
+            <EditText
+                android:id="@+id/editQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Quantity (e.g. 2)"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:minHeight="52dp"
+                android:padding="12dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#718071"
+                android:textColor="#234B35"
+                android:textColorHint="#687568"/>
+
+            <EditText
+                android:id="@+id/editUnit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Unit (e.g. kg, g, ml, pieces)"
+                android:inputType="text"
+                android:singleLine="true"
+                android:minHeight="52dp"
+                android:padding="12dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#718071"
+                android:textColor="#234B35"
+                android:textColorHint="#687568"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Expiry Date (optional)"
+                android:textColor="#234B35"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/editExpiryDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tap to select a date"
+                android:focusable="false"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:inputType="none"
+                android:singleLine="true"
+                android:minHeight="52dp"
+                android:padding="12dp"
+                android:backgroundTint="#718071"
+                android:textColor="#234B35"
+                android:textColorHint="#687568"/>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/buttonSaveIngredient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Save Ingredient"
-            android:layout_marginTop="24dp" />
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#2F6846"
+            android:minHeight="52dp"
+            android:layout_marginTop="22dp" />
 
         <Button
             android:id="@+id/buttonCancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cancel" />
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textColor="#234B35"
+            android:backgroundTint="#E7EDE1"
+            android:minHeight="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp" />
 
     </LinearLayout>
 </ScrollView>
